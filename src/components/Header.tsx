@@ -18,7 +18,7 @@ const Header = () => {
             <path d="M9 17h6"/>
             <circle cx="17" cy="17" r="2"/>
           </svg>
-          <span className="ml-2 text-xl font-bold">Crypti Cars</span>
+          <span className="ml-2 text-xl font-bold">Hadi Cars</span>
         </Link>
         <NavigationMenu>
           <NavigationMenuList>

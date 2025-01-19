@@ -101,7 +101,7 @@ const Index = () => {
             <div className="relative z-10 h-full flex items-center justify-center">
               <div className="text-center">
                 <h1 className="text-4xl md:text-6xl font-bold text-white text-center mb-8">
-                  Crypti Cars Marketplace
+                  Hadi Cars Marketplace
                 </h1>
                 <p className="text-xl text-white text-center mb-12">
                   Buy and sell luxury vehicles with cryptocurrency
@@ -239,7 +239,7 @@ const Index = () => {
         <footer className="py-8 border-t border-gray-200">
           <div className="container mx-auto px-4">
             <p className="text-center text-gray-600">
-              © 2025 Crypti Cars. Built by MTD Technologies
+              © 2025 Hadi Cars. Built by MTD Technologies
             </p>
           </div>
         </footer>
