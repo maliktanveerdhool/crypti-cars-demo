@@ -87,14 +87,26 @@ const Index = () => {
       <Header />
       <div className="container mx-auto px-4 py-12">
         <div className="relative mb-16">
-          <div className="w-full h-[500px] bg-black rounded-lg flex items-center justify-center">
-            <div className="text-center">
-              <h1 className="text-4xl md:text-6xl font-bold text-white text-center mb-8">
-                Crypti Cars Marketplace
-              </h1>
-              <p className="text-xl text-white text-center mb-12">
-                Buy and sell luxury vehicles with cryptocurrency
-              </p>
+          <div className="w-full h-[500px] bg-black rounded-lg overflow-hidden relative">
+            <video 
+              autoPlay 
+              muted 
+              loop 
+              className="absolute inset-0 w-full h-full object-cover opacity-70"
+            >
+              <source src="https://player.vimeo.com/external/456560647.sd.mp4?s=d42506180068d73d4c2c0b6b6e419db62c6ce0db&profile_id=164&oauth2_token_id=57447761" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <div className="absolute inset-0 bg-black bg-opacity-50" />
+            <div className="relative z-10 h-full flex items-center justify-center">
+              <div className="text-center">
+                <h1 className="text-4xl md:text-6xl font-bold text-white text-center mb-8">
+                  Crypti Cars Marketplace
+                </h1>
+                <p className="text-xl text-white text-center mb-12">
+                  Buy and sell luxury vehicles with cryptocurrency
+                </p>
+              </div>
             </div>
           </div>
         </div>
