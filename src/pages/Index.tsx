@@ -12,58 +12,68 @@ import {
 const Index = () => {
   const [showWidget, setShowWidget] = useState(false);
 
+  const carListings = [
+    {
+      image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800",
+      name: "Luxury Sports Car",
+      price: "45,000 USDT"
+    },
+    {
+      image: "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&w=800",
+      name: "Classic Vintage",
+      price: "35,000 USDT"
+    },
+    {
+      image: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=800",
+      name: "Modern SUV",
+      price: "55,000 USDT"
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-900 to-blue-950">
       <div className="container mx-auto px-4 py-12">
         <h1 className="text-4xl md:text-6xl font-bold text-white text-center mb-8">
-          Crypto On/Off Ramp
+          Crypti Cars Marketplace
         </h1>
         <p className="text-xl text-blue-100 text-center mb-12">
-          Buy and sell cryptocurrency with your local currency instantly
+          Buy and sell luxury vehicles with cryptocurrency
         </p>
         
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
-          <Card className="p-6 bg-white/10 backdrop-blur border-blue-400/20">
-            <h2 className="text-2xl font-bold text-white mb-4">Buy Crypto</h2>
-            <p className="text-blue-100 mb-6">
-              Purchase cryptocurrency using your preferred payment method
-            </p>
-            <Button 
-              onClick={() => setShowWidget(true)}
-              className="w-full bg-blue-500 hover:bg-blue-600"
-            >
-              Buy Now
-            </Button>
-          </Card>
-          
-          <Card className="p-6 bg-white/10 backdrop-blur border-blue-400/20">
-            <h2 className="text-2xl font-bold text-white mb-4">Sell Crypto</h2>
-            <p className="text-blue-100 mb-6">
-              Convert your cryptocurrency back to local currency
-            </p>
-            <Button 
-              onClick={() => setShowWidget(true)}
-              className="w-full bg-blue-500 hover:bg-blue-600"
-            >
-              Sell Now
-            </Button>
-          </Card>
+        <div className="grid md:grid-cols-3 gap-8 mb-12">
+          {carListings.map((car, index) => (
+            <Card key={index} className="p-6 bg-white/10 backdrop-blur border-blue-400/20">
+              <img 
+                src={car.image} 
+                alt={car.name}
+                className="w-full h-48 object-cover rounded-lg mb-4"
+              />
+              <h3 className="text-xl font-bold text-white mb-2">{car.name}</h3>
+              <p className="text-blue-100 mb-4">{car.price}</p>
+              <Button 
+                onClick={() => setShowWidget(true)}
+                className="w-full bg-blue-500 hover:bg-blue-600"
+              >
+                Buy with Crypto
+              </Button>
+            </Card>
+          ))}
         </div>
 
         <div className="text-center text-blue-200 space-y-4 mb-12">
-          <h3 className="text-xl font-semibold">Why Choose Us?</h3>
+          <h3 className="text-xl font-semibold">Why Choose Crypti Cars?</h3>
           <div className="grid md:grid-cols-3 gap-6">
             <div>
-              <h4 className="font-bold mb-2">Secure</h4>
-              <p>Industry-leading security measures</p>
+              <h4 className="font-bold mb-2">Secure Transactions</h4>
+              <p>Blockchain-verified ownership transfer</p>
             </div>
             <div>
-              <h4 className="font-bold mb-2">Fast</h4>
-              <p>Quick and easy transactions</p>
+              <h4 className="font-bold mb-2">Global Marketplace</h4>
+              <p>Buy and sell cars worldwide</p>
             </div>
             <div>
-              <h4 className="font-bold mb-2">Global</h4>
-              <p>Support for multiple currencies</p>
+              <h4 className="font-bold mb-2">Crypto-First</h4>
+              <p>Native cryptocurrency support</p>
             </div>
           </div>
         </div>
@@ -73,65 +83,76 @@ const Index = () => {
           <Accordion type="single" collapsible className="text-left">
             <AccordionItem value="item-1">
               <AccordionTrigger className="text-white">
-                How do I buy cryptocurrency?
+                How do I purchase a car with cryptocurrency?
               </AccordionTrigger>
               <AccordionContent className="text-blue-100">
-                To buy cryptocurrency, click the "Buy Now" button and follow these steps:
+                To purchase a car with cryptocurrency:
                 <ol className="list-decimal list-inside mt-2 space-y-2">
-                  <li>Select your preferred cryptocurrency</li>
-                  <li>Choose your payment method (credit card, bank transfer, etc.)</li>
-                  <li>Enter the amount you want to purchase</li>
-                  <li>Complete the verification process if required</li>
-                  <li>Confirm your transaction</li>
+                  <li>Select your desired vehicle</li>
+                  <li>Click "Buy with Crypto" button</li>
+                  <li>Choose your preferred cryptocurrency</li>
+                  <li>Complete KYC verification if required</li>
+                  <li>Transfer the funds to complete the purchase</li>
                 </ol>
               </AccordionContent>
             </AccordionItem>
 
             <AccordionItem value="item-2">
               <AccordionTrigger className="text-white">
-                How do I sell cryptocurrency?
+                What cryptocurrencies do you accept?
               </AccordionTrigger>
               <AccordionContent className="text-blue-100">
-                To sell cryptocurrency, click the "Sell Now" button and follow these steps:
-                <ol className="list-decimal list-inside mt-2 space-y-2">
-                  <li>Select the cryptocurrency you want to sell</li>
-                  <li>Choose your payout method</li>
-                  <li>Enter the amount you want to sell</li>
-                  <li>Verify your wallet address</li>
-                  <li>Confirm the transaction</li>
-                </ol>
+                We accept major cryptocurrencies including:
+                <ul className="list-disc list-inside mt-2 space-y-2">
+                  <li>Bitcoin (BTC)</li>
+                  <li>Ethereum (ETH)</li>
+                  <li>USDT</li>
+                  <li>USDC</li>
+                </ul>
               </AccordionContent>
             </AccordionItem>
 
             <AccordionItem value="item-3">
               <AccordionTrigger className="text-white">
-                What payment methods are accepted?
+                How is the vehicle delivery handled?
               </AccordionTrigger>
               <AccordionContent className="text-blue-100">
-                We accept various payment methods including credit/debit cards, bank transfers, and popular payment services. Available payment methods may vary by region and currency.
+                After payment confirmation, you can choose between:
+                <ul className="list-disc list-inside mt-2 space-y-2">
+                  <li>Professional vehicle transport service (additional fee)</li>
+                  <li>Pick up from our secure facilities</li>
+                  <li>Local dealership delivery where available</li>
+                </ul>
               </AccordionContent>
             </AccordionItem>
 
             <AccordionItem value="item-4">
               <AccordionTrigger className="text-white">
-                How long do transactions take?
+                What documentation do I need?
               </AccordionTrigger>
               <AccordionContent className="text-blue-100">
-                Transaction times vary depending on the payment method and network conditions:
+                Required documentation includes:
                 <ul className="list-disc list-inside mt-2 space-y-2">
-                  <li>Credit/debit card purchases: Usually instant to 30 minutes</li>
-                  <li>Bank transfers: 1-3 business days</li>
-                  <li>Crypto selling: 1-24 hours depending on the network</li>
+                  <li>Valid government-issued ID</li>
+                  <li>Proof of address</li>
+                  <li>KYC verification documents</li>
+                  <li>Valid driver's license</li>
                 </ul>
               </AccordionContent>
             </AccordionItem>
 
             <AccordionItem value="item-5">
               <AccordionTrigger className="text-white">
-                Is my transaction secure?
+                Is there a warranty on purchased vehicles?
               </AccordionTrigger>
               <AccordionContent className="text-blue-100">
-                Yes, we implement industry-standard security measures including encryption, secure socket layers (SSL), and multi-factor authentication to protect your transactions and personal information.
+                Yes, all vehicles come with:
+                <ul className="list-disc list-inside mt-2 space-y-2">
+                  <li>30-day money-back guarantee</li>
+                  <li>1-year limited warranty</li>
+                  <li>Optional extended warranty packages</li>
+                  <li>24/7 customer support</li>
+                </ul>
               </AccordionContent>
             </AccordionItem>
           </Accordion>
