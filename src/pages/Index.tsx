@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import TransakWidget from "@/components/TransakWidget";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -12,6 +12,30 @@ import {
 const Index = () => {
   const [showWidget, setShowWidget] = useState(false);
   const [selectedPrice, setSelectedPrice] = useState(0);
+  const [ethRate, setEthRate] = useState(0);
+  const [usdToEurRate, setUsdToEurRate] = useState(0);
+
+  useEffect(() => {
+    // Fetch ETH and EUR rates
+    const fetchRates = async () => {
+      try {
+        const [ethResponse, eurResponse] = await Promise.all([
+          fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd'),
+          fetch('https://api.exchangerate-api.com/v4/latest/USD')
+        ]);
+        
+        const ethData = await ethResponse.json();
+        const eurData = await eurResponse.json();
+        
+        setEthRate(1 / ethData.ethereum.usd); // Convert to ETH/USD rate
+        setUsdToEurRate(eurData.rates.EUR);
+      } catch (error) {
+        console.error('Error fetching rates:', error);
+      }
+    };
+
+    fetchRates();
+  }, []);
 
   const carListings = [
     {
@@ -39,6 +63,15 @@ const Index = () => {
     setShowWidget(true);
   };
 
+  const formatPrice = (priceUSD: number) => {
+    const priceEUR = priceUSD * usdToEurRate;
+    const priceETH = priceUSD * ethRate;
+    return {
+      eur: priceEUR.toFixed(2),
+      eth: priceETH.toFixed(6)
+    };
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-900 to-blue-950">
       <div className="container mx-auto px-4 py-12">
@@ -50,32 +83,30 @@ const Index = () => {
         </p>
         
         <div className="grid md:grid-cols-3 gap-8 mb-12">
-          {carListings.map((car, index) => (
-            <Card key={index} className="p-6 bg-white/10 backdrop-blur border-blue-400/20">
-              <img 
-                src={car.image} 
-                alt={car.name}
-                className="w-full h-48 object-cover rounded-lg mb-4"
-              />
-              <h3 className="text-xl font-bold text-white mb-2">{car.name}</h3>
-              <p className="text-blue-100 mb-2">{car.description}</p>
-              <p className="text-2xl font-bold text-blue-100 mb-4">${car.price}</p>
-              <div className="space-y-2">
+          {carListings.map((car, index) => {
+            const prices = formatPrice(car.price);
+            return (
+              <Card key={index} className="p-6 bg-white/10 backdrop-blur border-blue-400/20">
+                <img 
+                  src={car.image} 
+                  alt={car.name}
+                  className="w-full h-48 object-cover rounded-lg mb-4"
+                />
+                <h3 className="text-xl font-bold text-white mb-2">{car.name}</h3>
+                <p className="text-blue-100 mb-2">{car.description}</p>
+                <div className="space-y-1 mb-4">
+                  <p className="text-2xl font-bold text-blue-100">€{prices.eur}</p>
+                  <p className="text-lg text-blue-200">{prices.eth} ETH</p>
+                </div>
                 <Button 
                   onClick={() => handleBuyClick(car.price)}
-                  className="w-full bg-blue-500 hover:bg-blue-600 mb-2"
+                  className="w-full bg-blue-500 hover:bg-blue-600"
                 >
                   Buy with Crypto
                 </Button>
-                <Button 
-                  className="w-full bg-blue-500 hover:bg-blue-600"
-                  onClick={() => window.alert('Fiat payment integration coming soon!')}
-                >
-                  Buy with Fiat
-                </Button>
-              </div>
-            </Card>
-          ))}
+              </Card>
+            )
+          })}
         </div>
 
         <div className="text-center text-blue-200 space-y-4 mb-12">
