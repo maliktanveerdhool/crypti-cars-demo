@@ -2,6 +2,12 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import TransakWidget from "@/components/TransakWidget";
 import { useState } from "react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const Index = () => {
   const [showWidget, setShowWidget] = useState(false);
@@ -44,7 +50,7 @@ const Index = () => {
           </Card>
         </div>
 
-        <div className="text-center text-blue-200 space-y-4">
+        <div className="text-center text-blue-200 space-y-4 mb-12">
           <h3 className="text-xl font-semibold">Why Choose Us?</h3>
           <div className="grid md:grid-cols-3 gap-6">
             <div>
@@ -60,6 +66,75 @@ const Index = () => {
               <p>Support for multiple currencies</p>
             </div>
           </div>
+        </div>
+
+        <div className="max-w-3xl mx-auto bg-white/5 backdrop-blur rounded-lg p-6 mb-12">
+          <h2 className="text-2xl font-bold text-white mb-6 text-center">Frequently Asked Questions</h2>
+          <Accordion type="single" collapsible className="text-left">
+            <AccordionItem value="item-1">
+              <AccordionTrigger className="text-white">
+                How do I buy cryptocurrency?
+              </AccordionTrigger>
+              <AccordionContent className="text-blue-100">
+                To buy cryptocurrency, click the "Buy Now" button and follow these steps:
+                <ol className="list-decimal list-inside mt-2 space-y-2">
+                  <li>Select your preferred cryptocurrency</li>
+                  <li>Choose your payment method (credit card, bank transfer, etc.)</li>
+                  <li>Enter the amount you want to purchase</li>
+                  <li>Complete the verification process if required</li>
+                  <li>Confirm your transaction</li>
+                </ol>
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-2">
+              <AccordionTrigger className="text-white">
+                How do I sell cryptocurrency?
+              </AccordionTrigger>
+              <AccordionContent className="text-blue-100">
+                To sell cryptocurrency, click the "Sell Now" button and follow these steps:
+                <ol className="list-decimal list-inside mt-2 space-y-2">
+                  <li>Select the cryptocurrency you want to sell</li>
+                  <li>Choose your payout method</li>
+                  <li>Enter the amount you want to sell</li>
+                  <li>Verify your wallet address</li>
+                  <li>Confirm the transaction</li>
+                </ol>
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-3">
+              <AccordionTrigger className="text-white">
+                What payment methods are accepted?
+              </AccordionTrigger>
+              <AccordionContent className="text-blue-100">
+                We accept various payment methods including credit/debit cards, bank transfers, and popular payment services. Available payment methods may vary by region and currency.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-4">
+              <AccordionTrigger className="text-white">
+                How long do transactions take?
+              </AccordionTrigger>
+              <AccordionContent className="text-blue-100">
+                Transaction times vary depending on the payment method and network conditions:
+                <ul className="list-disc list-inside mt-2 space-y-2">
+                  <li>Credit/debit card purchases: Usually instant to 30 minutes</li>
+                  <li>Bank transfers: 1-3 business days</li>
+                  <li>Crypto selling: 1-24 hours depending on the network</li>
+                </ul>
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-5">
+              <AccordionTrigger className="text-white">
+                Is my transaction secure?
+              </AccordionTrigger>
+              <AccordionContent className="text-blue-100">
+                Yes, we implement industry-standard security measures including encryption, secure socket layers (SSL), and multi-factor authentication to protect your transactions and personal information.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
 
         {showWidget && <TransakWidget onClose={() => setShowWidget(false)} />}
