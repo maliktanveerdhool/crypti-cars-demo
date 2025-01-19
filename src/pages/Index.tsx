@@ -239,7 +239,7 @@ const Index = () => {
         <footer className="py-8 border-t border-gray-200">
           <div className="container mx-auto px-4">
             <p className="text-center text-gray-600">
-              © 2024 Crypti Cars. Built by MTD Technologies
+              © 2025 Crypti Cars. Built by MTD Technologies
             </p>
           </div>
         </footer>
