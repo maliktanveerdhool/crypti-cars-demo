@@ -11,24 +11,33 @@ import {
 
 const Index = () => {
   const [showWidget, setShowWidget] = useState(false);
+  const [selectedPrice, setSelectedPrice] = useState(0);
 
   const carListings = [
     {
       image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800",
       name: "Luxury Sports Car",
-      price: "45,000 USDT"
+      price: 5,
+      description: "Sleek and powerful sports car"
     },
     {
       image: "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&w=800",
       name: "Classic Vintage",
-      price: "35,000 USDT"
+      price: 10,
+      description: "Timeless classic beauty"
     },
     {
       image: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=800",
       name: "Modern SUV",
-      price: "55,000 USDT"
+      price: 15,
+      description: "Luxurious family vehicle"
     }
   ];
+
+  const handleBuyClick = (price: number) => {
+    setSelectedPrice(price);
+    setShowWidget(true);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-900 to-blue-950">
@@ -49,13 +58,23 @@ const Index = () => {
                 className="w-full h-48 object-cover rounded-lg mb-4"
               />
               <h3 className="text-xl font-bold text-white mb-2">{car.name}</h3>
-              <p className="text-blue-100 mb-4">{car.price}</p>
-              <Button 
-                onClick={() => setShowWidget(true)}
-                className="w-full bg-blue-500 hover:bg-blue-600"
-              >
-                Buy with Crypto
-              </Button>
+              <p className="text-blue-100 mb-2">{car.description}</p>
+              <p className="text-2xl font-bold text-blue-100 mb-4">${car.price}</p>
+              <div className="space-y-2">
+                <Button 
+                  onClick={() => handleBuyClick(car.price)}
+                  className="w-full bg-blue-500 hover:bg-blue-600 mb-2"
+                >
+                  Buy with Crypto
+                </Button>
+                <Button 
+                  variant="outline"
+                  className="w-full border-blue-400 text-blue-100 hover:bg-blue-400/20"
+                  onClick={() => window.alert('Fiat payment integration coming soon!')}
+                >
+                  Buy with Fiat
+                </Button>
+              </div>
             </Card>
           ))}
         </div>
@@ -158,7 +177,7 @@ const Index = () => {
           </Accordion>
         </div>
 
-        {showWidget && <TransakWidget onClose={() => setShowWidget(false)} />}
+        {showWidget && <TransakWidget onClose={() => setShowWidget(false)} price={selectedPrice} />}
       </div>
     </div>
   );

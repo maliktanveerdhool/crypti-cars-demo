@@ -4,9 +4,10 @@ import { useToast } from "@/components/ui/use-toast";
 
 interface TransakWidgetProps {
   onClose: () => void;
+  price?: number;
 }
 
-const TransakWidget = ({ onClose }: TransakWidgetProps) => {
+const TransakWidget = ({ onClose, price = 0 }: TransakWidgetProps) => {
   const { toast } = useToast();
 
   useEffect(() => {
@@ -20,6 +21,9 @@ const TransakWidget = ({ onClose }: TransakWidgetProps) => {
       themeColor: '000000', // App theme color in hex
       email: '', // Optional - customer's email address
       redirectURL: window.location.origin,
+      fiatAmount: price, // Set the selected price
+      defaultFiatAmount: price, // Set default amount
+      fiatCurrency: 'USD', // Set currency to USD
     };
 
     const transak = new Transak(transakConfig);
@@ -74,7 +78,7 @@ const TransakWidget = ({ onClose }: TransakWidgetProps) => {
     return () => {
       transak.cleanup();
     };
-  }, [onClose, toast]);
+  }, [onClose, toast, price]);
 
   return null;
 };
