@@ -68,8 +68,7 @@ const Index = () => {
                   Buy with Crypto
                 </Button>
                 <Button 
-                  variant="outline"
-                  className="w-full border-blue-400 text-blue-100 hover:bg-blue-400/20"
+                  className="w-full bg-blue-500 hover:bg-blue-600"
                   onClick={() => window.alert('Fiat payment integration coming soon!')}
                 >
                   Buy with Fiat
