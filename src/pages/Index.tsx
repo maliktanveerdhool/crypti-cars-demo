@@ -77,7 +77,7 @@ const Index = () => {
     const priceEUR = priceUSD * usdToEurRate;
     const priceETH = priceUSD * ethRate;
     return {
-      eur: priceEUR.toFixed(2),
+      eur: Math.round(priceEUR).toString(), // Removed decimal places for EUR
       eth: priceETH.toFixed(6)
     };
   };
