@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
-import TransakWidget from "@/components/TransakWidget";
+import { TransakConfig, Transak } from '@transak/transak-sdk';
 import Header from "@/components/Header";
 
 const Account = () => {
@@ -9,6 +9,65 @@ const Account = () => {
   const { toast } = useToast();
 
   const handleOnRamp = () => {
+    const transakConfig: TransakConfig = {
+      apiKey: '71ea25cd-22ce-4d91-a7c2-808813fca65d', // Different API key for account page
+      environment: Transak.ENVIRONMENTS.STAGING,
+      widgetHeight: "650px",
+      widgetWidth: "450px",
+      defaultCryptoCurrency: 'ETH',
+      walletAddress: '',
+      themeColor: '000000',
+      email: '',
+      redirectURL: window.location.origin,
+      defaultFiatAmount: 20,
+      fiatCurrency: 'EUR',
+    };
+
+    const transak = new Transak(transakConfig);
+    transak.init();
+
+    // Position the widget
+    const widget = document.querySelector('iframe[name="transak-iframe"]') as HTMLIFrameElement;
+    if (widget) {
+      widget.style.position = 'fixed';
+      widget.style.top = '50%';
+      widget.style.left = '50%';
+      widget.style.transform = 'translate(-50%, -50%)';
+      widget.style.zIndex = '50';
+    }
+
+    // Event listeners
+    Transak.on('*', (data) => {
+      console.log('Transak event:', data);
+    });
+
+    Transak.on(Transak.EVENTS.TRANSAK_WIDGET_CLOSE, () => {
+      toast({
+        title: "Widget Closed",
+        description: "Transaction cancelled",
+      });
+      setShowWidget(false);
+    });
+
+    Transak.on(Transak.EVENTS.TRANSAK_ORDER_CREATED, (orderData) => {
+      toast({
+        title: "Order Created",
+        description: "Your transaction is being processed",
+      });
+      console.log("Order created:", orderData);
+    });
+
+    Transak.on(Transak.EVENTS.TRANSAK_ORDER_SUCCESSFUL, (orderData) => {
+      toast({
+        title: "Success!",
+        description: "Transaction completed successfully",
+        variant: "default",
+      });
+      console.log("Order successful:", orderData);
+      transak.close();
+      setShowWidget(false);
+    });
+
     setShowWidget(true);
   };
 
@@ -64,13 +123,6 @@ const Account = () => {
           <p>Powered by Transak</p>
         </div>
       </footer>
-
-      {showWidget && (
-        <TransakWidget
-          onClose={() => setShowWidget(false)}
-          price={20} // Default minimum amount
-        />
-      )}
     </div>
   );
 };
