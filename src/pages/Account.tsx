@@ -84,7 +84,7 @@ const Account = () => {
       redirectURL: window.location.origin,
       defaultFiatAmount: 20,
       fiatCurrency: 'EUR',
-      isDisableWalletAddressForm: true,
+      disableWalletAddressForm: true, // Fixed property name here
       exchangeScreenTitle: 'Sell Crypto From Your Wallet',
       productsAvailed: 'SELL',
       defaultPaymentMethod: 'sepa_bank_transfer',
