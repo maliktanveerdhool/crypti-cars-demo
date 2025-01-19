@@ -29,7 +29,7 @@ const Index = () => {
         const ethData = await ethResponse.json();
         const eurData = await eurResponse.json();
         
-        setEthRate(1 / ethData.ethereum.usd); // Convert to ETH/USD rate
+        setEthRate(1 / ethData.ethereum.usd);
         setUsdToEurRate(eurData.rates.EUR);
       } catch (error) {
         console.error('Error fetching rates:', error);
@@ -73,14 +73,15 @@ const Index = () => {
     setShowWidget(true);
   };
 
-  const formatPrice = (priceUSD: number) => {
-    const priceEUR = priceUSD * usdToEurRate;
-    const priceETH = priceUSD * ethRate;
+  const formatPrice = (priceEUR: number) => {
+    const priceETH = priceEUR * ethRate / usdToEurRate;
     return {
-      eur: Math.round(priceEUR).toString(), // Removed decimal places for EUR
+      eur: priceEUR.toString(), // Direct EUR price without conversion
       eth: priceETH.toFixed(6)
     };
   };
+
+  // ... keep existing code (JSX for the marketplace UI, FAQ section, etc.)
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-900 to-blue-950">
