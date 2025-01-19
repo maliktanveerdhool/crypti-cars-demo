@@ -23,7 +23,7 @@ const TransakWidget = ({ onClose, price = 0 }: TransakWidgetProps) => {
       redirectURL: window.location.origin,
       fiatAmount: price, // Set the selected price
       defaultFiatAmount: price, // Set default amount
-      fiatCurrency: 'USD', // Set currency to USD
+      fiatCurrency: 'EUR', // Changed from USD to EUR
     };
 
     const transak = new Transak(transakConfig);
