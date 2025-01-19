@@ -85,35 +85,46 @@ const Index = () => {
   // ... keep existing code (JSX for the marketplace UI, FAQ section, etc.)
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-900 to-blue-950">
+    <div className="min-h-screen bg-white">
       <Header />
       <div className="container mx-auto px-4 py-12">
-        <h1 className="text-4xl md:text-6xl font-bold text-white text-center mb-8">
-          Crypti Cars Marketplace
-        </h1>
-        <p className="text-xl text-blue-100 text-center mb-12">
-          Buy and sell luxury vehicles with cryptocurrency
-        </p>
+        <div className="relative mb-16">
+          <img 
+            src="https://crypticars.com/wp-content/uploads/2024/12/screencapture-crypti-hexweb-net-2024-12-01-11_33_49.png"
+            alt="Hero"
+            className="w-full h-[500px] object-cover rounded-lg"
+          />
+          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-lg">
+            <div className="text-center">
+              <h1 className="text-4xl md:text-6xl font-bold text-white text-center mb-8">
+                Crypti Cars Marketplace
+              </h1>
+              <p className="text-xl text-white text-center mb-12">
+                Buy and sell luxury vehicles with cryptocurrency
+              </p>
+            </div>
+          </div>
+        </div>
         
         <div className="grid md:grid-cols-3 gap-8 mb-12">
           {carListings.map((car, index) => {
             const prices = formatPrice(car.price);
             return (
-              <Card key={index} className="p-6 bg-white/10 backdrop-blur border-blue-400/20">
+              <Card key={index} className="p-6 bg-white border-2 border-black">
                 <img 
                   src={car.image} 
                   alt={car.name}
                   className="w-full h-48 object-cover rounded-lg mb-4"
                 />
-                <h3 className="text-xl font-bold text-white mb-2">{car.name}</h3>
-                <p className="text-blue-100 mb-2">{car.description}</p>
+                <h3 className="text-xl font-bold text-black mb-2">{car.name}</h3>
+                <p className="text-gray-700 mb-2">{car.description}</p>
                 <div className="space-y-1 mb-4">
-                  <p className="text-2xl font-bold text-blue-100">€{prices.eur}</p>
-                  <p className="text-lg text-blue-200">{prices.eth} ETH</p>
+                  <p className="text-2xl font-bold text-black">€{prices.eur}</p>
+                  <p className="text-lg text-gray-600">{prices.eth} ETH</p>
                 </div>
                 <Button 
                   onClick={() => handleBuyClick(car.price)}
-                  className="w-full bg-blue-500 hover:bg-blue-600"
+                  className="w-full bg-black hover:bg-gray-800 text-white"
                 >
                   Buy with Crypto
                 </Button>
@@ -122,7 +133,7 @@ const Index = () => {
           })}
         </div>
 
-        <div className="text-center text-blue-200 space-y-4 mb-12">
+        <div className="text-center text-black space-y-4 mb-12">
           <h3 className="text-xl font-semibold">Why Choose Crypti Cars?</h3>
           <div className="grid md:grid-cols-3 gap-6">
             <div>
@@ -140,8 +151,8 @@ const Index = () => {
           </div>
         </div>
 
-        <div className="max-w-3xl mx-auto bg-white/5 backdrop-blur rounded-lg p-6 mb-12">
-          <h2 className="text-2xl font-bold text-white mb-6 text-center">Frequently Asked Questions</h2>
+        <div className="max-w-3xl mx-auto bg-white border-2 border-black rounded-lg p-6 mb-12">
+          <h2 className="text-2xl font-bold text-black mb-6 text-center">Frequently Asked Questions</h2>
           <Accordion type="single" collapsible className="text-left">
             <AccordionItem value="item-1">
               <AccordionTrigger className="text-white">
