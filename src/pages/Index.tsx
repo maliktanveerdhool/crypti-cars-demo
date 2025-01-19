@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import TransakWidget from "@/components/TransakWidget";
-import StripeCheckout from "@/components/StripeCheckout";
 import { useState } from "react";
 import {
   Accordion,
@@ -11,7 +10,7 @@ import {
 } from "@/components/ui/accordion";
 
 const Index = () => {
-  const [showTransak, setShowTransak] = useState(false);
+  const [showWidget, setShowWidget] = useState(false);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-900 to-blue-950">
@@ -29,15 +28,12 @@ const Index = () => {
             <p className="text-blue-100 mb-6">
               Purchase cryptocurrency using your preferred payment method
             </p>
-            <div className="space-y-4">
-              <Button 
-                onClick={() => setShowTransak(true)}
-                className="w-full bg-blue-500 hover:bg-blue-600"
-              >
-                Buy with Transak
-              </Button>
-              <StripeCheckout amount={100} currency="USD" />
-            </div>
+            <Button 
+              onClick={() => setShowWidget(true)}
+              className="w-full bg-blue-500 hover:bg-blue-600"
+            >
+              Buy Now
+            </Button>
           </Card>
           
           <Card className="p-6 bg-white/10 backdrop-blur border-blue-400/20">
@@ -45,15 +41,12 @@ const Index = () => {
             <p className="text-blue-100 mb-6">
               Convert your cryptocurrency back to local currency
             </p>
-            <div className="space-y-4">
-              <Button 
-                onClick={() => setShowTransak(true)}
-                className="w-full bg-blue-500 hover:bg-blue-600"
-              >
-                Sell with Transak
-              </Button>
-              <StripeCheckout amount={100} currency="USD" />
-            </div>
+            <Button 
+              onClick={() => setShowWidget(true)}
+              className="w-full bg-blue-500 hover:bg-blue-600"
+            >
+              Sell Now
+            </Button>
           </Card>
         </div>
 
@@ -80,14 +73,17 @@ const Index = () => {
           <Accordion type="single" collapsible className="text-left">
             <AccordionItem value="item-1">
               <AccordionTrigger className="text-white">
-                What payment methods are available?
+                How do I buy cryptocurrency?
               </AccordionTrigger>
               <AccordionContent className="text-blue-100">
-                We offer two main payment methods:
-                <ul className="list-disc list-inside mt-2 space-y-2">
-                  <li>Transak: Supports credit/debit cards, bank transfers, and various local payment methods</li>
-                  <li>Stripe: Secure credit/debit card payments and bank transfers</li>
-                </ul>
+                To buy cryptocurrency, click the "Buy Now" button and follow these steps:
+                <ol className="list-decimal list-inside mt-2 space-y-2">
+                  <li>Select your preferred cryptocurrency</li>
+                  <li>Choose your payment method (credit card, bank transfer, etc.)</li>
+                  <li>Enter the amount you want to purchase</li>
+                  <li>Complete the verification process if required</li>
+                  <li>Confirm your transaction</li>
+                </ol>
               </AccordionContent>
             </AccordionItem>
 
@@ -141,7 +137,7 @@ const Index = () => {
           </Accordion>
         </div>
 
-        {showTransak && <TransakWidget onClose={() => setShowTransak(false)} />}
+        {showWidget && <TransakWidget onClose={() => setShowWidget(false)} />}
       </div>
     </div>
   );
