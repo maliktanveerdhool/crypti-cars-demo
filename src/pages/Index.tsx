@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import TransakWidget from "@/components/TransakWidget";
 import { useState, useEffect } from "react";
+import Header from "@/components/Header";
 import {
   Accordion,
   AccordionContent,
@@ -85,6 +86,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-900 to-blue-950">
+      <Header />
       <div className="container mx-auto px-4 py-12">
         <h1 className="text-4xl md:text-6xl font-bold text-white text-center mb-8">
           Crypti Cars Marketplace

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
 import TransakWidget from "@/components/TransakWidget";
+import Header from "@/components/Header";
 
 const Account = () => {
   const [showWidget, setShowWidget] = useState(false);
@@ -20,14 +21,7 @@ const Account = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Header */}
-      <header className="bg-primary text-primary-foreground py-4">
-        <div className="container mx-auto px-4">
-          <h1 className="text-2xl font-bold">Account Dashboard</h1>
-        </div>
-      </header>
-
-      {/* Main Content */}
+      <Header />
       <main className="flex-grow container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
           <div className="bg-card rounded-lg shadow-lg p-6 space-y-6">
@@ -65,7 +59,6 @@ const Account = () => {
         </div>
       </main>
 
-      {/* Footer */}
       <footer className="bg-muted py-6">
         <div className="container mx-auto px-4 text-center text-muted-foreground">
           <p>Powered by Transak</p>
