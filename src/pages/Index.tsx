@@ -8,12 +8,14 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
   const [showWidget, setShowWidget] = useState(false);
   const [selectedPrice, setSelectedPrice] = useState(0);
   const [ethRate, setEthRate] = useState(0);
   const [usdToEurRate, setUsdToEurRate] = useState(0);
+  const { toast } = useToast();
 
   useEffect(() => {
     // Fetch ETH and EUR rates
