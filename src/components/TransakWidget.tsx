@@ -11,6 +11,16 @@ const TransakWidget = ({ onClose, price = 0 }: TransakWidgetProps) => {
   const { toast } = useToast();
 
   useEffect(() => {
+    if (price < 19) {
+      toast({
+        title: "Invalid Amount",
+        description: "Minimum purchase amount is 19 EUR",
+        variant: "destructive"
+      });
+      onClose();
+      return;
+    }
+
     const transakConfig: TransakConfig = {
       apiKey: '71ea25cd-22ce-4d91-a7c2-808813fca65d',
       environment: Transak.ENVIRONMENTS.STAGING,

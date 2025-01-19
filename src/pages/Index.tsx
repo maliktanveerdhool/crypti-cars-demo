@@ -41,24 +41,32 @@ const Index = () => {
     {
       image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800",
       name: "Luxury Sports Car",
-      price: 5,
+      price: 20,
       description: "Sleek and powerful sports car"
     },
     {
       image: "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&w=800",
       name: "Classic Vintage",
-      price: 10,
+      price: 30,
       description: "Timeless classic beauty"
     },
     {
       image: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=800",
       name: "Modern SUV",
-      price: 15,
+      price: 40,
       description: "Luxurious family vehicle"
     }
   ];
 
   const handleBuyClick = (price: number) => {
+    if (price < 19) {
+      toast({
+        title: "Invalid Amount",
+        description: "Minimum purchase amount is 19 EUR",
+        variant: "destructive"
+      });
+      return;
+    }
     setSelectedPrice(price);
     setShowWidget(true);
   };
