@@ -20,21 +20,23 @@ const TransakWidget = ({ onClose }: TransakWidgetProps) => {
       themeColor: '000000', // App theme color in hex
       email: '', // Optional - customer's email address
       redirectURL: window.location.origin,
-      widgetStyles: {
-        container: {
-          position: 'fixed',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          zIndex: 50,
-        }
-      }
+      hostURL: window.location.origin // Required for widget positioning
     };
 
     const transak = new Transak(transakConfig);
 
     // Initialize the widget
     transak.init();
+
+    // Position the widget using direct DOM manipulation after initialization
+    const widget = document.querySelector('iframe[name="transak-iframe"]');
+    if (widget) {
+      widget.style.position = 'fixed';
+      widget.style.top = '50%';
+      widget.style.left = '50%';
+      widget.style.transform = 'translate(-50%, -50%)';
+      widget.style.zIndex = '50';
+    }
 
     // Event listeners
     const handleClose = () => {
