@@ -72,10 +72,70 @@ const Account = () => {
   };
 
   const handleOffRamp = () => {
-    toast({
-      title: "Coming Soon",
-      description: "Off-ramp functionality will be available soon.",
+    const transakConfig: TransakConfig = {
+      apiKey: '71ea25cd-22ce-4d91-a7c2-808813fca65d',
+      environment: Transak.ENVIRONMENTS.STAGING,
+      widgetHeight: "650px",
+      widgetWidth: "450px",
+      defaultCryptoCurrency: 'ETH',
+      walletAddress: '',
+      themeColor: '000000',
+      email: '',
+      redirectURL: window.location.origin,
+      defaultFiatAmount: 20,
+      fiatCurrency: 'EUR',
+      isDisableWalletAddressForm: true,
+      exchangeScreenTitle: 'Sell Crypto From Your Wallet',
+      productsAvailed: 'SELL',
+      defaultPaymentMethod: 'sepa_bank_transfer',
+    };
+
+    const transak = new Transak(transakConfig);
+    transak.init();
+
+    // Position the widget
+    const widget = document.querySelector('iframe[name="transak-iframe"]') as HTMLIFrameElement;
+    if (widget) {
+      widget.style.position = 'fixed';
+      widget.style.top = '50%';
+      widget.style.left = '50%';
+      widget.style.transform = 'translate(-50%, -50%)';
+      widget.style.zIndex = '50';
+    }
+
+    // Event listeners
+    Transak.on('*', (data) => {
+      console.log('Transak off-ramp event:', data);
     });
+
+    Transak.on(Transak.EVENTS.TRANSAK_WIDGET_CLOSE, () => {
+      toast({
+        title: "Widget Closed",
+        description: "Sell transaction cancelled",
+      });
+      setShowWidget(false);
+    });
+
+    Transak.on(Transak.EVENTS.TRANSAK_ORDER_CREATED, (orderData) => {
+      toast({
+        title: "Sell Order Created",
+        description: "Your sell transaction is being processed",
+      });
+      console.log("Sell order created:", orderData);
+    });
+
+    Transak.on(Transak.EVENTS.TRANSAK_ORDER_SUCCESSFUL, (orderData) => {
+      toast({
+        title: "Success!",
+        description: "Sell transaction completed successfully",
+        variant: "default",
+      });
+      console.log("Sell order successful:", orderData);
+      transak.close();
+      setShowWidget(false);
+    });
+
+    setShowWidget(true);
   };
 
   return (
@@ -100,7 +160,7 @@ const Account = () => {
               <div className="p-4 border rounded-lg">
                 <h3 className="text-lg font-medium mb-4">Sell Crypto (Off-Ramp)</h3>
                 <p className="text-muted-foreground mb-4">
-                  Convert your cryptocurrency back to fiat currency.
+                  Convert your cryptocurrency back to fiat currency via SEPA transfer.
                 </p>
                 <Button onClick={handleOffRamp} variant="outline" className="w-full">
                   Sell Crypto
