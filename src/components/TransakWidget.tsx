@@ -15,7 +15,11 @@ const TransakWidget = ({ onClose }: TransakWidgetProps) => {
       environment: Transak.ENVIRONMENTS.STAGING,
       widgetHeight: "650px",
       widgetWidth: "450px",
-      hostURL: window.location.origin,
+      defaultCryptoCurrency: 'ETH',
+      walletAddress: '', // Optional - customer's wallet address
+      themeColor: '000000', // App theme color in hex
+      email: '', // Optional - customer's email address
+      redirectURL: window.location.origin,
       widgetStyles: {
         container: {
           position: 'fixed',
@@ -60,10 +64,10 @@ const TransakWidget = ({ onClose }: TransakWidgetProps) => {
       onClose();
     };
 
-    // Add event listeners
-    transak.on(Transak.EVENTS.TRANSAK_WIDGET_CLOSE, handleClose);
-    transak.on(Transak.EVENTS.TRANSAK_ORDER_CREATED, handleOrderCreated);
-    transak.on(Transak.EVENTS.TRANSAK_ORDER_SUCCESSFUL, handleOrderSuccessful);
+    // Add event listeners using static Transak.on method
+    Transak.on(Transak.EVENTS.TRANSAK_WIDGET_CLOSE, handleClose);
+    Transak.on(Transak.EVENTS.TRANSAK_ORDER_CREATED, handleOrderCreated);
+    Transak.on(Transak.EVENTS.TRANSAK_ORDER_SUCCESSFUL, handleOrderSuccessful);
 
     // Cleanup
     return () => {
