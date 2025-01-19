@@ -82,19 +82,12 @@ const Index = () => {
     };
   };
 
-  // ... keep existing code (JSX for the marketplace UI, FAQ section, etc.)
-
   return (
     <div className="min-h-screen bg-white">
       <Header />
       <div className="container mx-auto px-4 py-12">
         <div className="relative mb-16">
-          <img 
-            src="https://crypticars.com/wp-content/uploads/2024/12/screencapture-crypti-hexweb-net-2024-12-01-11_33_49.png"
-            alt="Hero"
-            className="w-full h-[500px] object-cover rounded-lg"
-          />
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-lg">
+          <div className="w-full h-[500px] bg-black rounded-lg flex items-center justify-center">
             <div className="text-center">
               <h1 className="text-4xl md:text-6xl font-bold text-white text-center mb-8">
                 Crypti Cars Marketplace
@@ -155,10 +148,10 @@ const Index = () => {
           <h2 className="text-2xl font-bold text-black mb-6 text-center">Frequently Asked Questions</h2>
           <Accordion type="single" collapsible className="text-left">
             <AccordionItem value="item-1">
-              <AccordionTrigger className="text-white">
+              <AccordionTrigger className="text-black">
                 How do I purchase a car with cryptocurrency?
               </AccordionTrigger>
-              <AccordionContent className="text-blue-100">
+              <AccordionContent className="text-black">
                 To purchase a car with cryptocurrency:
                 <ol className="list-decimal list-inside mt-2 space-y-2">
                   <li>Select your desired vehicle</li>
@@ -171,10 +164,10 @@ const Index = () => {
             </AccordionItem>
 
             <AccordionItem value="item-2">
-              <AccordionTrigger className="text-white">
+              <AccordionTrigger className="text-black">
                 What cryptocurrencies do you accept?
               </AccordionTrigger>
-              <AccordionContent className="text-blue-100">
+              <AccordionContent className="text-black">
                 We accept major cryptocurrencies including:
                 <ul className="list-disc list-inside mt-2 space-y-2">
                   <li>Bitcoin (BTC)</li>
@@ -186,10 +179,10 @@ const Index = () => {
             </AccordionItem>
 
             <AccordionItem value="item-3">
-              <AccordionTrigger className="text-white">
+              <AccordionTrigger className="text-black">
                 How is the vehicle delivery handled?
               </AccordionTrigger>
-              <AccordionContent className="text-blue-100">
+              <AccordionContent className="text-black">
                 After payment confirmation, you can choose between:
                 <ul className="list-disc list-inside mt-2 space-y-2">
                   <li>Professional vehicle transport service (additional fee)</li>
@@ -200,10 +193,10 @@ const Index = () => {
             </AccordionItem>
 
             <AccordionItem value="item-4">
-              <AccordionTrigger className="text-white">
+              <AccordionTrigger className="text-black">
                 What documentation do I need?
               </AccordionTrigger>
-              <AccordionContent className="text-blue-100">
+              <AccordionContent className="text-black">
                 Required documentation includes:
                 <ul className="list-disc list-inside mt-2 space-y-2">
                   <li>Valid government-issued ID</li>
@@ -215,10 +208,10 @@ const Index = () => {
             </AccordionItem>
 
             <AccordionItem value="item-5">
-              <AccordionTrigger className="text-white">
+              <AccordionTrigger className="text-black">
                 Is there a warranty on purchased vehicles?
               </AccordionTrigger>
-              <AccordionContent className="text-blue-100">
+              <AccordionContent className="text-black">
                 Yes, all vehicles come with:
                 <ul className="list-disc list-inside mt-2 space-y-2">
                   <li>30-day money-back guarantee</li>
@@ -230,6 +223,14 @@ const Index = () => {
             </AccordionItem>
           </Accordion>
         </div>
+
+        <footer className="py-8 border-t border-gray-200">
+          <div className="container mx-auto px-4">
+            <p className="text-center text-gray-600">
+              © 2024 Crypti Cars. Built by MTD Technologies
+            </p>
+          </div>
+        </footer>
 
         {showWidget && <TransakWidget onClose={() => setShowWidget(false)} price={selectedPrice} />}
       </div>
