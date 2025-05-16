@@ -1,5 +1,7 @@
 🚗 CryptiCars Demo
 A Web3 car showcase demo integrated with MetaMask. Users can connect their crypto wallet, explore virtual cars, and experience the basics of blockchain interaction through a sleek, modern interface.
+![image](https://github.com/user-attachments/assets/6d592baf-b6a8-4cf0-95e4-e1d408f75fc9)
+
 
 ⚙️ Features
 🔐 MetaMask wallet connection
